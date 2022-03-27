@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/chartFragment">
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.chocomiruku.fuzzylogiclabworks.ChartFragment"
+        android:label="fragment_chart"
+        tools:layout="@layout/fragment_chart" >
+        <action
+            android:id="@+id/action_chartFragment_to_addFuzzySetDialog"
+            app:destination="@id/addFuzzySetDialog" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/addFuzzySetDialog"
+        android:name="com.chocomiruku.fuzzylogiclabworks.AddFuzzySetDialog"
+        android:label="fragment_add_fuzzy_set"
+        tools:layout="@layout/dialog_add_fuzzy_set" />
+</navigation>

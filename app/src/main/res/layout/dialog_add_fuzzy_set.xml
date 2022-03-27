@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:paddingVertical="@dimen/linear_vertical_padding"
+    tools:context=".AddFuzzySetDialog"
+    tools:ignore="Autofill, LabelFor">
+
+    <TextView
+        android:paddingHorizontal="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginBottom="16dp"
+        style="@style/label_header2"
+        android:text="@string/enter_base_points"/>
+
+    <LinearLayout
+        android:paddingHorizontal="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/a_text"
+            style="@style/label_header2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:text="@string/a" />
+
+        <EditText
+            android:id="@+id/a_edit"
+            style="@style/label_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingHorizontal="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/b_text"
+            style="@style/label_header2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:text="@string/b" />
+
+        <EditText
+            android:id="@+id/b_edit"
+            style="@style/label_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingHorizontal="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/c_text"
+            style="@style/label_header2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:text="@string/c" />
+
+        <EditText
+            android:id="@+id/c_edit"
+            style="@style/label_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingHorizontal="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/d_text"
+            style="@style/label_header2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:text="@string/d" />
+
+        <EditText
+            android:id="@+id/d_edit"
+            style="@style/label_default"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingHorizontal="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/x_text"
+            style="@style/label_header2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:text="@string/x" />
+
+        <EditText
+            android:id="@+id/x_edit"
+            style="@style/label_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:inputType="number" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:text="@string/add_set"/>
+
+</LinearLayout>

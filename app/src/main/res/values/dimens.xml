@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="outer_margin">16dp</dimen>
+    <dimen name="linear_horizontal_padding">22dp</dimen>
+    <dimen name="linear_vertical_padding">14dp</dimen>
+    <dimen name="linear_bottom_margin">4dp</dimen>
+</resources>
