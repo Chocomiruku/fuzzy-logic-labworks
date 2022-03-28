@@ -165,7 +165,7 @@ class ChartFragment : Fragment() {
             }
         }
 
-        updateXAxisMaximum(fuzzySetPoints.maxOrNull())
+        updateXAxisMaximum(fuzzySetPoints.dropLast(1).maxOrNull())
 
         binding.fuzzySetsChart.data?.let {
             binding.fuzzySetsChart.data.addDataSet(set)
