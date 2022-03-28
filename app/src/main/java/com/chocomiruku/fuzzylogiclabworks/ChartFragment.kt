@@ -97,7 +97,7 @@ class ChartFragment : Fragment() {
                 binding.a1Text.text = getString(R.string.a).plus(" " + fuzzySetPointsStrings[0])
                 binding.b1Text.text = getString(R.string.b).plus(" " + fuzzySetPointsStrings[1])
                 binding.c1Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[2])
-                binding.d1Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[3])
+                binding.d1Text.text = getString(R.string.d).plus(" " + fuzzySetPointsStrings[3])
                 binding.m1Text.text = getString(R.string.m).plus(" μ($xValue) = $mValue")
 
                 binding.fuzzySet1.visibility = View.VISIBLE
@@ -108,7 +108,7 @@ class ChartFragment : Fragment() {
                 binding.a2Text.text = getString(R.string.a).plus(" " + fuzzySetPointsStrings[0])
                 binding.b2Text.text = getString(R.string.b).plus(" " + fuzzySetPointsStrings[1])
                 binding.c2Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[2])
-                binding.d2Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[3])
+                binding.d2Text.text = getString(R.string.d).plus(" " + fuzzySetPointsStrings[3])
                 binding.m2Text.text = getString(R.string.m).plus(" μ($xValue) = $mValue")
 
                 binding.fuzzySet2.visibility = View.VISIBLE
@@ -118,7 +118,7 @@ class ChartFragment : Fragment() {
                 binding.a3Text.text = getString(R.string.a).plus(" " + fuzzySetPointsStrings[0])
                 binding.b3Text.text = getString(R.string.b).plus(" " + fuzzySetPointsStrings[1])
                 binding.c3Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[2])
-                binding.d3Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[3])
+                binding.d3Text.text = getString(R.string.d).plus(" " + fuzzySetPointsStrings[3])
                 binding.m3Text.text = getString(R.string.m).plus(" μ($xValue) = $mValue")
 
                 binding.fuzzySet3.visibility = View.VISIBLE
