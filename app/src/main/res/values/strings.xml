@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Оценка затрат на оплату труда</string>
+    <string name="app_name">Лабораторная №1</string>
     <string name="fab_content_desc">add_fuzzy_set_content_desc</string>
     <string name="fuzzy_sets_charts">Графики нечётких множеств</string>
     <string name="a">A:</string>
