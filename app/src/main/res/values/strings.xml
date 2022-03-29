@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Лабораторная №1</string>
+    <string name="app_name">Оценка затрат на оплату труда</string>
     <string name="fab_content_desc">add_fuzzy_set_content_desc</string>
     <string name="fuzzy_sets_charts">Графики нечётких множеств</string>
     <string name="a">A:</string>
@@ -10,7 +10,7 @@
     <string name="base_points">Исходные данные</string>
     <string name="x">x:</string>
     <string name="add_set">Добавить</string>
-    <string name="enter_base_points">Введите параметры функций принадлежности и чёткий объект x</string>
+    <string name="enter_base_points">Введите параметры функции принадлежности и чёткий объект x</string>
     <string name="empty_field_found">Не все входные параметры функции принадлежности были заполнены</string>
     <string name="set_1">Множество 1</string>
     <string name="set_2">Множество 2</string>
