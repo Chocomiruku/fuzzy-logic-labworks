@@ -3,28 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     android:paddingVertical="@dimen/linear_vertical_padding"
     tools:context=".AddFuzzySetDialog"
     tools:ignore="Autofill, LabelFor">
 
     <TextView
-        android:paddingHorizontal="30dp"
-        android:layout_gravity="center_horizontal"
+        style="@style/label_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
-        style="@style/label_header2"
-        android:text="@string/enter_base_points"/>
+        android:paddingHorizontal="20dp"
+        android:text="@string/enter_base_points"
+        android:textAlignment="center" />
 
-    <LinearLayout
-        android:paddingHorizontal="100dp"
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:checkedButton="@+id/radio_button_triangle"
+        android:gravity="center"
         android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_button_triangle"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_height="match_parent"
+            android:text="@string/triangle" />
+
+        <RadioButton
+            android:id="@+id/radio_button_trapezoid"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/trapezoid" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="50dp">
+
+        <TextView
+            android:id="@+id/name_text"
+            style="@style/label_header2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.8"
+            android:text="@string/name" />
+
+        <EditText
+            android:id="@+id/name_edit"
+            style="@style/label_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:imeOptions="actionNext"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="100dp">
 
         <TextView
             android:id="@+id/a_text"
@@ -39,6 +90,7 @@
             android:id="@+id/a_edit"
             style="@style/label_default"
             android:layout_width="0dp"
+            android:imeOptions="actionNext"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_weight="1"
@@ -47,11 +99,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:paddingHorizontal="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="100dp">
 
         <TextView
             android:id="@+id/b_text"
@@ -67,6 +119,7 @@
             style="@style/label_default"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
             android:layout_gravity="start"
             android:layout_weight="1"
             android:inputType="number" />
@@ -74,11 +127,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:paddingHorizontal="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="100dp">
 
         <TextView
             android:id="@+id/c_text"
@@ -96,16 +149,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_weight="1"
+            android:imeOptions="actionNext"
             android:inputType="number" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:paddingHorizontal="100dp"
+        android:id="@+id/point_d_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="100dp"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/d_text"
@@ -123,16 +180,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_weight="1"
+            android:imeOptions="actionNext|actionDone"
             android:inputType="number" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:paddingHorizontal="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="100dp">
 
         <TextView
             android:id="@+id/x_text"
@@ -149,6 +207,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:imeOptions="actionDone"
             android:layout_weight="1"
             android:inputType="number" />
 
@@ -157,10 +216,11 @@
 
     <Button
         android:id="@+id/add_btn"
-        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="100dp"
-        android:text="@string/add_set"/>
+        android:text="@string/add_set"
+        android:layout_marginBottom="24dp"/>
 
 </LinearLayout>

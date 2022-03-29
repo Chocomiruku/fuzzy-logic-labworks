@@ -1,10 +1,15 @@
 package com.chocomiruku.fuzzylogiclabworks
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.LinearLayout
+import android.widget.TableRow
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
@@ -16,15 +21,12 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 
 class ChartFragment : Fragment() {
     private var _binding: FragmentChartBinding? = null
     private val binding get() = _binding!!
-    private var fuzzySetsCount = 0
-    private var fuzzySetFirst = mutableListOf<String>()
-    private var fuzzySetSecond = mutableListOf<String>()
-    private var fuzzySetThird = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,25 +39,10 @@ class ChartFragment : Fragment() {
         setFragmentResultListener(AddFuzzySetDialog.REQUEST_KEY) { _, bundle ->
             val fuzzySetPoints = bundle.getStringArray(AddFuzzySetDialog.BUNDLE_KEY)
             fuzzySetPoints?.let {
-                when (fuzzySetsCount) {
-                    0 -> {
-                        fuzzySetFirst = fuzzySetPoints.toMutableList()
-                        addFuzzySetsData(fuzzySetFirst)
-                        fuzzySetsCount++
-                    }
-                    1 -> {
-                        fuzzySetSecond = fuzzySetPoints.toMutableList()
-                        addFuzzySetsData(fuzzySetSecond)
-                        binding.findIntersectionBtn.visibility = View.VISIBLE
-                        fuzzySetsCount++
-                    }
-                    else -> {
-                        fuzzySetThird = fuzzySetPoints.toMutableList()
-                        addFuzzySetsData(fuzzySetThird)
-                        binding.addFuzzySetBtn.visibility = View.GONE
-                        fuzzySetsCount++
-                    }
-                }
+                addFuzzySetsData(fuzzySetPoints.toMutableList())
+
+                binding.basePointsText.visibility = View.VISIBLE
+                binding.table.visibility = View.VISIBLE
             }
         }
 
@@ -65,19 +52,11 @@ class ChartFragment : Fragment() {
             )
         }
 
-        binding.findIntersectionBtn.setOnClickListener {
-            addIntersectionToChart()
-        }
 
         binding.resetBtn.setOnClickListener {
-            fuzzySetsCount = 0
             binding.basePointsText.visibility = View.GONE
-            binding.fuzzySet1.visibility = View.GONE
-            binding.fuzzySet2.visibility = View.GONE
-            binding.fuzzySet3.visibility = View.GONE
-            binding.findIntersectionBtn.visibility = View.GONE
-            binding.addFuzzySetBtn.visibility = View.VISIBLE
-            binding.fuzzySetsChart.data?. let {
+            binding.table.visibility = View.GONE
+            binding.fuzzySetsChart.data?.let {
                 binding.fuzzySetsChart.data.clearValues()
                 binding.fuzzySetsChart.invalidate()
                 binding.fuzzySetsChart.clear()
@@ -88,84 +67,49 @@ class ChartFragment : Fragment() {
     }
 
     private fun addFuzzySetsData(fuzzySetPointsStrings: MutableList<String>) {
-        val fuzzySetPointsFloat = fuzzySetPointsStrings.map { it.toFloat() }
-        val xValue = fuzzySetPointsFloat[4]
-        val mValue = getDegreeOfBelonging(fuzzySetPointsFloat)
+        val fuzzySetName = fuzzySetPointsStrings[0]
+        val fuzzySetPointsFloat = fuzzySetPointsStrings.drop(1).map { it.toFloat() }
 
-        when (fuzzySetsCount) {
-            0 -> {
-                binding.a1Text.text = getString(R.string.a).plus(" " + fuzzySetPointsStrings[0])
-                binding.b1Text.text = getString(R.string.b).plus(" " + fuzzySetPointsStrings[1])
-                binding.c1Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[2])
-                binding.d1Text.text = getString(R.string.d).plus(" " + fuzzySetPointsStrings[3])
-                binding.m1Text.text = getString(R.string.m).plus(" μ($xValue) = $mValue")
-
-                binding.fuzzySet1.visibility = View.VISIBLE
-                binding.basePointsText.visibility = View.VISIBLE
-                addDataToChart(fuzzySetPointsFloat)
-            }
-            1 -> {
-                binding.a2Text.text = getString(R.string.a).plus(" " + fuzzySetPointsStrings[0])
-                binding.b2Text.text = getString(R.string.b).plus(" " + fuzzySetPointsStrings[1])
-                binding.c2Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[2])
-                binding.d2Text.text = getString(R.string.d).plus(" " + fuzzySetPointsStrings[3])
-                binding.m2Text.text = getString(R.string.m).plus(" μ($xValue) = $mValue")
-
-                binding.fuzzySet2.visibility = View.VISIBLE
-                addDataToChart(fuzzySetPointsFloat)
-            }
-            else -> {
-                binding.a3Text.text = getString(R.string.a).plus(" " + fuzzySetPointsStrings[0])
-                binding.b3Text.text = getString(R.string.b).plus(" " + fuzzySetPointsStrings[1])
-                binding.c3Text.text = getString(R.string.c).plus(" " + fuzzySetPointsStrings[2])
-                binding.d3Text.text = getString(R.string.d).plus(" " + fuzzySetPointsStrings[3])
-                binding.m3Text.text = getString(R.string.m).plus(" μ($xValue) = $mValue")
-
-                binding.fuzzySet3.visibility = View.VISIBLE
-                addDataToChart(fuzzySetPointsFloat)
-            }
-        }
+        addDataToChart(fuzzySetName, fuzzySetPointsFloat)
+        addDataInTable(fuzzySetPointsStrings)
     }
 
-    private fun addDataToChart(fuzzySetPoints: List<Float>) {
-
+    private fun addDataToChart(name: String, fuzzySetPoints: List<Float>) {
         val values = mutableListOf<Entry>()
-        values.apply {
-            add(Entry(fuzzySetPoints[0], 0F))
-            add(Entry(fuzzySetPoints[1], 1F))
-            add(Entry(fuzzySetPoints[2], 1F))
-            add(Entry(fuzzySetPoints[3], 0F))
-        }
-
-        val set = LineDataSet(values, "")
-
-        set.axisDependency = YAxis.AxisDependency.LEFT
-        set.fillAlpha = 100
-        set.setDrawFilled(true)
-        set.lineWidth = 2f
-        set.setDrawValues(false)
-
-        set.apply {
-            when (fuzzySetsCount) {
-                0 -> {
-                    label = "Множество 1"
-                    color = requireContext().getColor(R.color.green_200)
-                    fillColor = requireContext().getColor(R.color.green_200)
+        when (fuzzySetPoints.size) {
+            4 -> {
+                values.apply {
+                    add(Entry(fuzzySetPoints[0], 0F))
+                    add(Entry(fuzzySetPoints[1], 1F))
+                    add(Entry(fuzzySetPoints[2], 0F))
                 }
-                1 -> {
-                    label = "Множество 2"
-                    color = requireContext().getColor(R.color.violet_500)
-                    fillColor = requireContext().getColor(R.color.violet_500)
-                }
-                else -> {
-                    label = "Множество 3"
-                    color = requireContext().getColor(R.color.green_500)
-                    fillColor = requireContext().getColor(R.color.green_500)
+            }
+            5 -> {
+                values.apply {
+                    add(Entry(fuzzySetPoints[0], 0F))
+                    add(Entry(fuzzySetPoints[1], 1F))
+                    add(Entry(fuzzySetPoints[2], 1F))
+                    add(Entry(fuzzySetPoints[3], 0F))
                 }
             }
         }
 
-        updateXAxisMaximum(fuzzySetPoints.dropLast(1).maxOrNull())
+        val set = LineDataSet(values, name)
+        val random = Random()
+        val randomColor =
+            Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256))
+
+        set.apply {
+            axisDependency = YAxis.AxisDependency.LEFT
+            fillAlpha = 100
+            setDrawFilled(true)
+            lineWidth = 2f
+            setDrawValues(false)
+            color = randomColor
+            fillColor = randomColor
+        }
+
+        updateXAxisBorders(fuzzySetPoints)
 
         binding.fuzzySetsChart.data?.let {
             binding.fuzzySetsChart.data.addDataSet(set)
@@ -180,44 +124,67 @@ class ChartFragment : Fragment() {
         }
     }
 
-    private fun addIntersectionToChart() {
-        val intersectionPoints: List<Pair<Float, Float>>?
+    private fun addDataInTable(fuzzySetPointsStrings: MutableList<String>) {
+        val fuzzySetName = fuzzySetPointsStrings[0]
+        val fuzzySetPointsFloat = fuzzySetPointsStrings.drop(1).map { it.toFloat() }
 
-        try {
-            intersectionPoints = when (fuzzySetsCount) {
-                2 -> {
-                    val trapezoids = listOf(fuzzySetFirst.dropLast(1).map { it.toFloat() }, fuzzySetSecond.map { it.toFloat() })
-                    findIntersection(trapezoids)
-                }
-                else -> {
-                    val trapezoids = listOf(fuzzySetFirst.dropLast(1).map { it.toFloat() }, fuzzySetSecond.map { it.toFloat() }, fuzzySetThird.map { it.toFloat() })
-                    findIntersection(trapezoids)
-                }
+        val table = binding.table
+        val row = TableRow(requireContext())
+        row.setPadding(10, 10, 10, 10)
+        table.addView(row)
+
+        val textViewName = TextView(requireContext())
+        styleTextView(textViewName)
+        textViewName.text = fuzzySetName
+        textViewName.layoutParams =
+            TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2F)
+        row.addView(textViewName)
+
+        val textViewPointA = TextView(requireContext())
+        styleTextView(textViewPointA)
+        textViewPointA.text = fuzzySetPointsStrings[1]
+        row.addView(textViewPointA)
+
+        val textViewPointB = TextView(requireContext())
+        styleTextView(textViewPointB)
+        textViewPointB.text = fuzzySetPointsStrings[2]
+        row.addView(textViewPointB)
+
+        val textViewPointC = TextView(requireContext())
+        styleTextView(textViewPointC)
+        textViewPointC.text = fuzzySetPointsStrings[3]
+        row.addView(textViewPointC)
+
+        val textViewPointD = TextView(requireContext())
+        styleTextView(textViewPointD)
+
+        val textViewValueM = TextView(requireContext())
+        styleTextView(textViewValueM)
+        textViewValueM.setOnClickListener {
+            showSnackBarXValue(fuzzySetPointsFloat.last())
+        }
+
+        when (fuzzySetPointsStrings.size) {
+            5 -> {
+                textViewPointD.text = ""
+                row.addView(textViewPointD)
+
+                val mValue = getDegreeOfBelongingTriangle(fuzzySetPointsFloat)
+                textViewValueM.text = mValue.toString()
+                textViewValueM.layoutParams =
+                    TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.2F)
+                row.addView(textViewValueM)
             }
+            6 -> {
+                textViewPointD.text = fuzzySetPointsStrings[4]
+                row.addView(textViewPointD)
 
-            val values = mutableListOf<Entry>()
-
-            for (point in intersectionPoints) {
-                values.add(Entry(point.first, point.second))
+                val mValue = getDegreeOfBelongingTrapezoid(fuzzySetPointsFloat)
+                textViewValueM.text = mValue.toString()
+                textViewValueM.layoutParams =
+                    TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.2F)
+                row.addView(textViewValueM)
             }
-
-            val set = LineDataSet(values, "Пересечение")
-            set.apply {
-                axisDependency = YAxis.AxisDependency.LEFT
-                fillAlpha = 100
-                setDrawFilled(true)
-                lineWidth = 2f
-                setDrawValues(false)
-                color = requireContext().getColor(R.color.pink_600)
-                fillColor = requireContext().getColor(R.color.pink_600)
-            }
-
-            binding.fuzzySetsChart.data.addDataSet(set)
-            binding.fuzzySetsChart.notifyDataSetChanged()
-            binding.fuzzySetsChart.invalidate()
-
-        } catch (e: Exception) {
-            showSnackSetsDontIntersect()
         }
     }
 
@@ -247,23 +214,34 @@ class ChartFragment : Fragment() {
         val xAxis = chart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.axisMinimum = 0F
-        xAxis.isGranularityEnabled = true
-        xAxis.granularity = 1F
-        xAxis.labelCount = 20
+        xAxis.labelCount = 10
         xAxis.setDrawGridLines(true)
     }
 
-    private fun updateXAxisMaximum(maxValue: Float?) {
+    private fun styleTextView(textView: TextView) {
+        textView.layoutParams =
+            TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+
+        textView.apply {
+            background = ContextCompat.getDrawable(requireActivity(), R.drawable.item_border)
+            gravity = Gravity.CENTER_HORIZONTAL
+            setTextAppearance(R.style.table_default)
+        }
+    }
+
+    private fun updateXAxisBorders(fuzzySetPoints: List<Float>) {
+        val maxValue = fuzzySetPoints.dropLast(1).maxOrNull()
+
+        val xAxis = binding.fuzzySetsChart.xAxis
         maxValue?.let {
-            val xAxis = binding.fuzzySetsChart.xAxis
             if (maxValue > xAxis.axisMaximum) {
-                xAxis.axisMaximum = maxValue + 5F
+                xAxis.axisMaximum = maxValue + 500F
+                xAxis.labelCount = 10
             }
         }
     }
 
-    private fun showSnackSetsDontIntersect() {
-        Snackbar.make(binding.findIntersectionBtn, R.string.sets_dont_intersect, Snackbar.LENGTH_LONG)
-            .show()
+    private fun showSnackBarXValue(xValue: Float) {
+        Snackbar.make(binding.table, "x: $xValue", Snackbar.LENGTH_LONG).show()
     }
 }
