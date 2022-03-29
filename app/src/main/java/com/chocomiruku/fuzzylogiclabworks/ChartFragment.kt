@@ -248,7 +248,6 @@ class ChartFragment : Fragment() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.axisMinimum = 0F
         xAxis.isGranularityEnabled = true
-        xAxis.granularity = 1F
         xAxis.labelCount = 20
         xAxis.setDrawGridLines(true)
     }
