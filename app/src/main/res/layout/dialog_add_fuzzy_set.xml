@@ -180,37 +180,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_weight="1"
-            android:imeOptions="actionNext|actionDone"
-            android:inputType="number" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="100dp">
-
-        <TextView
-            android:id="@+id/x_text"
-            style="@style/label_header2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.5"
-            android:text="@string/x" />
-
-        <EditText
-            android:id="@+id/x_edit"
-            style="@style/label_default"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:imeOptions="actionDone"
-            android:layout_weight="1"
             android:inputType="number" />
-
 
     </LinearLayout>
 
@@ -221,6 +192,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="100dp"
         android:text="@string/add_set"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="24dp" />
 
 </LinearLayout>

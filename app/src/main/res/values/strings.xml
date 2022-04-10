@@ -10,10 +10,12 @@
     <string name="base_points">Шкалы</string>
     <string name="x">x</string>
     <string name="add_set">Добавить</string>
-    <string name="enter_base_points">Введите параметры функции принадлежности и чёткий объект x</string>
+    <string name="enter_base_points">Введите параметры функции принадлежности</string>
     <string name="empty_field_found">Не все входные параметры функции принадлежности были заполнены</string>
     <string name="triangle">Треугольная</string>
     <string name="trapezoid">Трапециевидная</string>
     <string name="name">Наименование</string>
     <string name="title">Имя</string>
+    <string name="get_degree_of_belonging">Рассчитать степень принадлежности для чёткого объекта x:</string>
+    <string name="enter_x">Введите значение чёткого объекта x:</string>
 </resources>

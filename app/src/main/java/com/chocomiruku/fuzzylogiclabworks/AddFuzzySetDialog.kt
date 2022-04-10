@@ -41,13 +41,11 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
             val pointA = binding.aEdit.text.toString()
             val pointB = binding.bEdit.text.toString()
             val pointC = binding.cEdit.text.toString()
-            val valueX = binding.xEdit.text.toString()
 
             when (functionType) {
                 FunctionType.TRIANGLE -> {
                     if (checkFields(
                             name = name,
-                            valueX = valueX,
                             pointA = pointA,
                             pointB = pointB,
                             pointC = pointC
@@ -60,8 +58,7 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
                                     name,
                                     pointA,
                                     pointB,
-                                    pointC,
-                                    valueX
+                                    pointC
                                 ).toTypedArray()
                             )
                         )
@@ -72,7 +69,6 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
                     val pointD = binding.dEdit.text.toString()
                     if (checkFields(
                             name = name,
-                            valueX = valueX,
                             pointA = pointA,
                             pointB = pointB,
                             pointC = pointC,
@@ -88,7 +84,6 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
                                     pointB,
                                     pointC,
                                     pointD,
-                                    valueX
                                 ).toTypedArray()
                             )
                         )
@@ -104,13 +99,12 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
 
     private fun checkFields(
         name: String,
-        valueX: String,
         pointA: String,
         pointB: String,
         pointC: String,
         pointD: String? = null
     ): Boolean {
-        if (name.isBlank() || valueX.isBlank() || pointA.isBlank() || pointB.isBlank() || pointC.isBlank()) {
+        if (name.isBlank() || pointA.isBlank() || pointB.isBlank() || pointC.isBlank()) {
             showSnackBarEmptyFieldFound()
             return false
         }

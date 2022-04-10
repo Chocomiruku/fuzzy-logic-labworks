@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ import java.util.*
 class ChartFragment : Fragment() {
     private var _binding: FragmentChartBinding? = null
     private val binding get() = _binding!!
+    private var fuzzySets = mutableListOf<List<Float>>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +45,10 @@ class ChartFragment : Fragment() {
 
                 binding.basePointsText.visibility = View.VISIBLE
                 binding.table.visibility = View.VISIBLE
+                binding.getDegreeOfBelongingLabel.visibility = View.VISIBLE
+                binding.xText.visibility = View.VISIBLE
+                binding.xEdit.visibility = View.VISIBLE
+                binding.getDegreeOfBelongingBtn.visibility = View.VISIBLE
             }
         }
 
@@ -50,6 +56,10 @@ class ChartFragment : Fragment() {
             findNavController().navigate(
                 ChartFragmentDirections.actionChartFragmentToAddFuzzySetDialog()
             )
+        }
+
+        binding.getDegreeOfBelongingBtn.setOnClickListener {
+            calculateDegreeOfBelonging()
         }
 
 
@@ -61,6 +71,12 @@ class ChartFragment : Fragment() {
                 binding.fuzzySetsChart.invalidate()
                 binding.fuzzySetsChart.clear()
             }
+
+            binding.getDegreeOfBelongingLabel.visibility = View.GONE
+            binding.xText.text = ""
+            binding.xText.visibility = View.GONE
+            binding.xEdit.visibility = View.GONE
+            binding.getDegreeOfBelongingBtn.visibility = View.GONE
         }
 
         return binding.root
@@ -69,6 +85,7 @@ class ChartFragment : Fragment() {
     private fun addFuzzySetsData(fuzzySetPointsStrings: MutableList<String>) {
         val fuzzySetName = fuzzySetPointsStrings[0]
         val fuzzySetPointsFloat = fuzzySetPointsStrings.drop(1).map { it.toFloat() }
+        fuzzySets.add(fuzzySetPointsFloat)
 
         addDataToChart(fuzzySetName, fuzzySetPointsFloat)
         addDataInTable(fuzzySetPointsStrings)
@@ -77,14 +94,14 @@ class ChartFragment : Fragment() {
     private fun addDataToChart(name: String, fuzzySetPoints: List<Float>) {
         val values = mutableListOf<Entry>()
         when (fuzzySetPoints.size) {
-            4 -> {
+            3 -> {
                 values.apply {
                     add(Entry(fuzzySetPoints[0], 0F))
                     add(Entry(fuzzySetPoints[1], 1F))
                     add(Entry(fuzzySetPoints[2], 0F))
                 }
             }
-            5 -> {
+            4 -> {
                 values.apply {
                     add(Entry(fuzzySetPoints[0], 0F))
                     add(Entry(fuzzySetPoints[1], 1F))
@@ -126,18 +143,20 @@ class ChartFragment : Fragment() {
 
     private fun addDataInTable(fuzzySetPointsStrings: MutableList<String>) {
         val fuzzySetName = fuzzySetPointsStrings[0]
-        val fuzzySetPointsFloat = fuzzySetPointsStrings.drop(1).map { it.toFloat() }
 
         val table = binding.table
         val row = TableRow(requireContext())
-        row.setPadding(10, 10, 10, 10)
         table.addView(row)
 
         val textViewName = TextView(requireContext())
-        styleTextView(textViewName)
-        textViewName.text = fuzzySetName
-        textViewName.layoutParams =
-            TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2F)
+        textViewName.apply {
+            text = fuzzySetName
+            layoutParams = TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.2F)
+            setPadding(10)
+            background = ContextCompat.getDrawable(requireActivity(), R.drawable.item_border)
+            gravity = Gravity.CENTER_HORIZONTAL
+            setTextAppearance(R.style.table_default)
+        }
         row.addView(textViewName)
 
         val textViewPointA = TextView(requireContext())
@@ -158,33 +177,56 @@ class ChartFragment : Fragment() {
         val textViewPointD = TextView(requireContext())
         styleTextView(textViewPointD)
 
-        val textViewValueM = TextView(requireContext())
-        styleTextView(textViewValueM)
-        textViewValueM.setOnClickListener {
-            showSnackBarXValue(fuzzySetPointsFloat.last())
-        }
-
         when (fuzzySetPointsStrings.size) {
-            5 -> {
+            4 -> {
                 textViewPointD.text = ""
                 row.addView(textViewPointD)
-
-                val mValue = getDegreeOfBelongingTriangle(fuzzySetPointsFloat)
-                textViewValueM.text = mValue.toString()
-                textViewValueM.layoutParams =
-                    TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.2F)
-                row.addView(textViewValueM)
             }
-            6 -> {
+            5 -> {
                 textViewPointD.text = fuzzySetPointsStrings[4]
                 row.addView(textViewPointD)
-
-                val mValue = getDegreeOfBelongingTrapezoid(fuzzySetPointsFloat)
-                textViewValueM.text = mValue.toString()
-                textViewValueM.layoutParams =
-                    TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.2F)
-                row.addView(textViewValueM)
             }
+        }
+
+        val textViewValueM = TextView(requireContext())
+        textViewValueM.apply {
+            layoutParams = TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+            text = ""
+            setPadding(10)
+            background = ContextCompat.getDrawable(requireActivity(), R.drawable.item_border)
+            gravity = Gravity.CENTER_HORIZONTAL
+            setTextAppearance(R.style.table_bold)
+        }
+        row.addView(textViewValueM)
+    }
+
+    private fun calculateDegreeOfBelonging() {
+        binding.xEdit.text?.let {
+            val valueX = it.toString().toFloat()
+            val fuzzySets = fuzzySets.toList()
+            val table = binding.table
+
+            for (fuzzySet in fuzzySets) {
+                var valueM: Float? = null
+
+                when (fuzzySet.size) {
+                    3 -> {
+                        valueM = getDegreeOfBelongingTriangle(fuzzySet, valueX)
+                    }
+                    4 -> {
+                        valueM = getDegreeOfBelongingTrapezoid(fuzzySet, valueX)
+                    }
+                }
+
+                val tableRow = table.getChildAt(fuzzySets.indexOf(fuzzySet) + 1) as TableRow
+                val textViewM = tableRow.getChildAt(5) as TextView
+                valueM?.let {
+                    textViewM.text = valueM.toString()
+                    textViewM.setTextAppearance(R.style.table_bold)
+                }
+            }
+        } ?: run {
+            showSnackBarEnterX()
         }
     }
 
@@ -223,14 +265,16 @@ class ChartFragment : Fragment() {
             TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
 
         textView.apply {
+            setPadding(10)
             background = ContextCompat.getDrawable(requireActivity(), R.drawable.item_border)
             gravity = Gravity.CENTER_HORIZONTAL
             setTextAppearance(R.style.table_default)
         }
     }
 
+
     private fun updateXAxisBorders(fuzzySetPoints: List<Float>) {
-        val maxValue = fuzzySetPoints.dropLast(1).maxOrNull()
+        val maxValue = fuzzySetPoints.maxOrNull()
 
         val xAxis = binding.fuzzySetsChart.xAxis
         maxValue?.let {
@@ -241,7 +285,8 @@ class ChartFragment : Fragment() {
         }
     }
 
-    private fun showSnackBarXValue(xValue: Float) {
-        Snackbar.make(binding.table, "x: $xValue", Snackbar.LENGTH_LONG).show()
+    private fun showSnackBarEnterX() {
+        Snackbar.make(binding.getDegreeOfBelongingBtn, R.string.enter_x, Snackbar.LENGTH_LONG)
+            .show()
     }
 }
