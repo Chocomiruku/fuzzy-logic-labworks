@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.chocomiruku.fuzzylogiclabworks.databinding.FragmentChartBinding
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.DataSet
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -223,11 +224,51 @@ class ChartFragment : Fragment() {
                 valueM?.let {
                     textViewM.text = valueM.toString()
                     textViewM.setTextAppearance(R.style.table_bold)
+                    addPointToChart(valueX, valueM)
                 }
             }
         } ?: run {
             showSnackBarEnterX()
         }
+    }
+
+    private fun addPointToChart(valueX: Float, valueM: Float) {
+        val chart = binding.fuzzySetsChart
+
+        var pointDataSetIndex: Int? = null
+        for (dataSet in chart.data.dataSets) {
+            if (dataSet.label.contains("x: ")) {
+                pointDataSetIndex = chart.data.dataSets.indexOf(dataSet)
+            }
+         }
+        pointDataSetIndex?.let {
+            chart.data.removeDataSet(it)
+        }
+
+        val values = mutableListOf<Entry>()
+
+        values.apply {
+            add(Entry(valueX, valueM))
+            add(Entry(valueX, 0F))
+        }
+
+        val set = LineDataSet(values, "x: ${valueX.toInt()}")
+        val random = Random()
+        val randomColor =
+            Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256))
+
+        set.apply {
+            axisDependency = YAxis.AxisDependency.LEFT
+            lineWidth = 5f
+            setDrawValues(true)
+            valueTextSize = 12f
+            color = randomColor
+            setDrawCircles(true)
+        }
+
+        chart.data.addDataSet(set)
+        chart.notifyDataSetChanged()
+        chart.invalidate()
     }
 
     private fun styleChart() {
