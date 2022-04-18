@@ -8,15 +8,15 @@
         android:id="@+id/chartFragment"
         android:name="com.chocomiruku.fuzzylogiclabworks.ChartFragment"
         android:label="fragment_chart"
-        tools:layout="@layout/fragment_chart" >
+        tools:layout="@layout/fragment_chart">
         <action
-            android:id="@+id/action_chartFragment_to_addFuzzySetDialog"
-            app:destination="@id/addFuzzySetDialog" />
+            android:id="@+id/action_chartFragment_to_clusteringParametersDialog"
+            app:destination="@id/clusteringParametersDialog" />
     </fragment>
 
     <dialog
-        android:id="@+id/addFuzzySetDialog"
-        android:name="com.chocomiruku.fuzzylogiclabworks.AddFuzzySetDialog"
+        android:id="@+id/clusteringParametersDialog"
+        android:name="com.chocomiruku.fuzzylogiclabworks.ClusteringParametersDialog"
         android:label="fragment_add_fuzzy_set"
-        tools:layout="@layout/dialog_add_fuzzy_set" />
+        tools:layout="@layout/dialog_clustering_parameters" />
 </navigation>
