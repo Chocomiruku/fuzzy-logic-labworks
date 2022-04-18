@@ -10,7 +10,7 @@
     <string name="calc_precision">Уровень точности</string>
     <string name="max_iterations_count">Max число итераций</string>
     <string name="ok">Ок</string>
-    <string name="empty_field_found">Не все параметры кластеризации были заполнены были заполнены</string>
+    <string name="empty_field_found">Не все параметры кластеризации были заполнены</string>
     <string name="fuzziness_degree_incorrect">Степень нечёткостии должна быть больше 1. Обычно это значение из диапазона от 1.5 до 2</string>
     <string name="clusters_count_incorrect">Число кластеров должно быть больше 1</string>
     <string name="calculations_precision_incorrect">Уровень точности вычислений должен быть меньше 1. Обычно это значение равно 0.001</string>
