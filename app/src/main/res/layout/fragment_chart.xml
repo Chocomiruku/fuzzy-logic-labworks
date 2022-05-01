@@ -6,213 +6,216 @@
     android:layout_height="match_parent"
     tools:context=".ChartFragment">
 
-    <TextView
-        android:id="@+id/fuzzy_sets_chart_text"
-        style="@style/label_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fuzzy_sets_charts"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="@id/guideline_top" />
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/fuzzy_sets_chart"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="@dimen/outer_margin"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/fuzzy_sets_chart_text"
-        app:layout_constraintVertical_bias="0" />
-
-    <TextView
-        android:id="@+id/base_points_text"
-        style="@style/label_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/outer_margin"
-        android:text="@string/base_points"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/fuzzy_sets_chart"
-        tools:visibility="visible" />
 
     <ScrollView
-        android:id="@+id/base_points_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/base_points_text">
+        app:layout_constraintTop_toTopOf="@id/guideline_top">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TableLayout
-                android:id="@+id/table"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible">
-
-                <TableRow android:background="@color/violet_500">
-
-                    <TextView
-                        style="@style/label_header2"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.2"
-                        android:width="0dp"
-                        android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="@string/title"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        style="@style/label_header2"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:width="0dp"
-                        android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="@string/a"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        style="@style/label_header2"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:width="0dp"
-                        android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="@string/b"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        style="@style/label_header2"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:width="0dp"
-                        android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="@string/c"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        style="@style/label_header2"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:width="0dp"
-                        android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="@string/d"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        style="@style/label_header2"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:width="0dp"
-                        android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="@string/m"
-                        android:textColor="@color/white" />
-                </TableRow>
-            </TableLayout>
-
-
             <TextView
-                android:id="@+id/get_degree_of_belonging_label"
-                style="@style/label_header2"
+                android:id="@+id/linguistic_variables_chart_text"
+                style="@style/label_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/linguistic_variables"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/linguistic_variables_chart"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/chart_height"
+                android:layout_marginTop="@dimen/outer_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linguistic_variables_chart_text" />
+
+            <Button
+                android:id="@+id/add_linguistic_variable_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_set"
                 android:layout_marginTop="16dp"
-                android:text="@string/get_degree_of_belonging"
-                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linguistic_variables_chart"/>
+
+            <TextView
+                android:id="@+id/crisp_values_chart_text"
+                style="@style/label_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/crisp_values_chart"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/table"
+                app:layout_constraintTop_toBottomOf="@id/add_linguistic_variable_btn"
+                tools:visibility="visible" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/crisp_values_chart"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/chart_height"
+                android:layout_marginTop="@dimen/outer_margin"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/crisp_values_chart_text"
+                app:layout_constraintVertical_bias="0"
                 tools:visibility="visible" />
 
             <TextView
-                android:id="@+id/x_text"
+                android:id="@+id/fuzzy_values_chart_text"
+                style="@style/label_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/fuzzy_values_chart"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/crisp_values_chart"
+                tools:visibility="visible" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/fuzzy_values_chart"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/chart_height"
+                android:layout_marginTop="@dimen/outer_margin"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fuzzy_values_chart_text"
+                app:layout_constraintVertical_bias="0"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/trends_chart_text"
+                style="@style/label_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                android:text="@string/trends_chart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fuzzy_values_chart"
+                tools:visibility="visible" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/trends_chart"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/chart_height"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/trends_chart_text"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/base_data_label"
+                style="@style/label_header2"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/base_data_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/trends_chart" />
+
+            <TextView
+                android:id="@+id/base_data"
+                style="@style/label_default"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/outer_margin"
+                android:justificationMode="inter_word"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/base_data_label"
+                tools:text="@string/fuzzy_time_series_values" />
+
+            <TextView
+                android:id="@+id/add_fuzzy_time_series_values_label"
                 style="@style/label_header2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/x"
-                android:visibility="gone"
-                app:layout_constraintEnd_toStartOf="@id/x_edit"
+                android:text="@string/add_fuzzy_time_series_value"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/base_data" />
+
+            <TextView
+                android:id="@+id/fuzzy_time_series_value_text"
+                style="@style/label_header2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/fuzzy_time_series_value"
+                app:layout_constraintEnd_toStartOf="@id/fuzzy_time_series_value_edit"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/get_degree_of_belonging_label"
-                tools:visibility="visible" />
+                app:layout_constraintTop_toBottomOf="@id/add_fuzzy_time_series_values_label" />
 
             <EditText
-                android:id="@+id/x_edit"
+                android:id="@+id/fuzzy_time_series_value_edit"
                 style="@style/label_default"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/outer_margin"
                 android:imeOptions="actionDone"
                 android:inputType="number"
-                android:visibility="gone"
-                app:layout_constraintBaseline_toBaselineOf="@id/x_text"
-                app:layout_constraintEnd_toStartOf="@id/get_degree_of_belonging_btn"
-                app:layout_constraintStart_toEndOf="@id/x_text"
-                tools:visibility="visible" />
+                app:layout_constraintBaseline_toBaselineOf="@id/fuzzy_time_series_value_text"
+                app:layout_constraintEnd_toStartOf="@id/add_btn"
+                app:layout_constraintStart_toEndOf="@id/fuzzy_time_series_value_text" />
 
             <ImageButton
-                android:id="@+id/get_degree_of_belonging_btn"
+                android:id="@+id/add_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/outer_margin"
                 android:backgroundTint="@color/green_200"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/x_edit"
+                app:layout_constraintBottom_toBottomOf="@id/fuzzy_time_series_value_edit"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/x_edit"
-                app:srcCompat="@drawable/ic_baseline_check_24"
-                tools:visibility="visible" />
+                app:layout_constraintStart_toEndOf="@id/fuzzy_time_series_value_edit"
+                app:srcCompat="@drawable/ic_baseline_check_24" />
+
+            <Button
+                android:id="@+id/run_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/outer_margin"
+                android:text="@string/run"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fuzzy_time_series_value_edit" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_fuzzy_set_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/outer_margin"
-        android:backgroundTint="@color/green_200"
-        android:contentDescription="@string/fab_content_desc"
-        app:layout_constraintBottom_toTopOf="@id/reset_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/reset_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/outer_margin"
-        android:contentDescription="@string/fab_content_desc"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_clear_24" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="16dp" />
+        app:layout_constraintGuide_begin="@dimen/outer_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"

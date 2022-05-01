@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
-import com.chocomiruku.fuzzylogiclabworks.databinding.DialogAddFuzzySetBinding
+import com.chocomiruku.fuzzylogiclabworks.databinding.DialogAddLinguisticVariableBinding
+import com.chocomiruku.fuzzylogiclabworks.fuzzy_util.Trapezoid
+import com.chocomiruku.fuzzylogiclabworks.fuzzy_util.Triangle
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 
-class AddFuzzySetDialog : BottomSheetDialogFragment() {
-    private var _binding: DialogAddFuzzySetBinding? = null
+class AddLinguisticVariableDialog : BottomSheetDialogFragment() {
+    private var _binding: DialogAddLinguisticVariableBinding? = null
     private val binding get() = _binding!!
     private var functionType: FunctionType = FunctionType.TRIANGLE
 
@@ -21,7 +23,7 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogAddFuzzySetBinding.inflate(inflater, container, false)
+        _binding = DialogAddLinguisticVariableBinding.inflate(inflater, container, false)
 
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
@@ -54,12 +56,12 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
                         setFragmentResult(
                             REQUEST_KEY,
                             bundleOf(
-                                BUNDLE_KEY to listOf(
-                                    name,
-                                    pointA,
-                                    pointB,
-                                    pointC
-                                ).toTypedArray()
+                                TRIANGLE_BUNDLE_KEY to Triangle(
+                                    pointA.toFloat(),
+                                    pointB.toFloat(),
+                                    pointC.toFloat(),
+                                    name
+                                )
                             )
                         )
                         findNavController().navigateUp()
@@ -78,13 +80,13 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
                         setFragmentResult(
                             REQUEST_KEY,
                             bundleOf(
-                                BUNDLE_KEY to listOf(
-                                    name,
-                                    pointA,
-                                    pointB,
-                                    pointC,
-                                    pointD,
-                                ).toTypedArray()
+                                TRAPEZOID_BUNDLE_KEY to Trapezoid(
+                                    pointA.toFloat(),
+                                    pointB.toFloat(),
+                                    pointC.toFloat(),
+                                    pointD.toFloat(),
+                                    name
+                                )
                             )
                         )
                         findNavController().navigateUp()
@@ -123,8 +125,9 @@ class AddFuzzySetDialog : BottomSheetDialogFragment() {
     }
 
     companion object {
-        const val REQUEST_KEY = "ADD_FUZZY_SET"
-        const val BUNDLE_KEY = "FUZZY_SET"
+        const val REQUEST_KEY = "ADD_MEMBERSHIP_FUNCTION"
+        const val TRIANGLE_BUNDLE_KEY = "TRIANGLE"
+        const val TRAPEZOID_BUNDLE_KEY = "TRAPEZOID"
 
         enum class FunctionType { TRIANGLE, TRAPEZOID }
     }

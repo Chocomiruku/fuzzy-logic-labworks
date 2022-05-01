@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:paddingVertical="@dimen/linear_vertical_padding"
-    tools:context=".AddFuzzySetDialog"
+    tools:context=".AddLinguisticVariableDialog"
     tools:ignore="Autofill, LabelFor">
 
     <TextView

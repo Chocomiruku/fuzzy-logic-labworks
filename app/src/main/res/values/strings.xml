@@ -1,21 +1,24 @@
 <resources>
-    <string name="app_name">Оценка затрат на оплату труда</string>
+    <string name="app_name">Лабораторная №4: Нечёткие ВР</string>
     <string name="fab_content_desc">add_fuzzy_set_content_desc</string>
-    <string name="fuzzy_sets_charts">Графики нечётких множеств</string>
     <string name="a">A</string>
     <string name="b">B</string>
     <string name="c">C</string>
     <string name="d">D</string>
-    <string name="m">μ(x)</string>
-    <string name="base_points">Шкалы</string>
-    <string name="x">x</string>
     <string name="add_set">Добавить</string>
-    <string name="enter_base_points">Введите параметры функции принадлежности</string>
-    <string name="empty_field_found">Не все входные параметры функции принадлежности были заполнены</string>
+    <string name="enter_base_points">Введите параметры лингвистической переменной</string>
+    <string name="empty_field_found">Не все входные параметры лингвистической переменной были заполнены</string>
     <string name="triangle">Треугольная</string>
     <string name="trapezoid">Трапециевидная</string>
     <string name="name">Наименование</string>
-    <string name="title">Имя</string>
-    <string name="get_degree_of_belonging">Рассчитать степень принадлежности для чёткого объекта x:</string>
-    <string name="enter_x">Введите значение чёткого объекта x:</string>
+    <string name="linguistic_variables">Лингвистические переменные</string>
+    <string name="crisp_values_chart">График чётких значений</string>
+    <string name="fuzzy_values_chart">График нечётких значений</string>
+    <string name="base_data_label">Входные значения затрат на оплату труда (тыс. руб.)</string>
+    <string name="fuzzy_time_series_values">Затраты 1, затраты 2, затраты 3, …</string>
+    <string name="add_fuzzy_time_series_value">Добавить значение</string>
+    <string name="fuzzy_time_series_value">Затраты (тыс. руб.):</string>
+    <string name="run">Построить НВР и тенденции</string>
+    <string name="enter_fuzzy_time_series_value">Введите значение</string>
+    <string name="trends_chart">График тенденций</string>
 </resources>

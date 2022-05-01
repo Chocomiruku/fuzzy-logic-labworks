@@ -10,13 +10,13 @@
         android:label="fragment_chart"
         tools:layout="@layout/fragment_chart" >
         <action
-            android:id="@+id/action_chartFragment_to_addFuzzySetDialog"
-            app:destination="@id/addFuzzySetDialog" />
+            android:id="@+id/action_chartFragment_to_addLinguisticVariableDialog"
+            app:destination="@id/addLinguisticVariableDialog" />
     </fragment>
 
     <dialog
-        android:id="@+id/addFuzzySetDialog"
-        android:name="com.chocomiruku.fuzzylogiclabworks.AddFuzzySetDialog"
+        android:id="@+id/addLinguisticVariableDialog"
+        android:name="com.chocomiruku.fuzzylogiclabworks.AddLinguisticVariableDialog"
         android:label="fragment_add_fuzzy_set"
-        tools:layout="@layout/dialog_add_fuzzy_set" />
+        tools:layout="@layout/dialog_add_linguistic_variable" />
 </navigation>

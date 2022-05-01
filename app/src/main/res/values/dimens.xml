@@ -4,4 +4,5 @@
     <dimen name="linear_horizontal_padding">22dp</dimen>
     <dimen name="linear_vertical_padding">14dp</dimen>
     <dimen name="linear_bottom_margin">4dp</dimen>
+    <dimen name="chart_height">170dp</dimen>
 </resources>
