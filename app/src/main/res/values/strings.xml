@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Лабораторная №4: Нечёткие ВР</string>
+    <string name="app_name">Лабораторная №5: Модель Сонга</string>
     <string name="fab_content_desc">add_fuzzy_set_content_desc</string>
     <string name="a">A</string>
     <string name="b">B</string>
@@ -14,11 +14,23 @@
     <string name="linguistic_variables">Лингвистические переменные</string>
     <string name="crisp_values_chart">График чётких значений</string>
     <string name="fuzzy_values_chart">График нечётких значений</string>
-    <string name="base_data_label">Входные значения затрат на оплату труда (тыс. руб.)</string>
+    <string name="base_data_label">Входные значения временного ряда затрат на оплату труда (тыс. руб.)</string>
     <string name="fuzzy_time_series_values">Затраты 1, затраты 2, затраты 3, …</string>
     <string name="add_fuzzy_time_series_value">Добавить значение</string>
     <string name="fuzzy_time_series_value">Затраты (тыс. руб.):</string>
-    <string name="run">Построить НВР и тенденции</string>
+    <string name="predict">Прогноз по модели Сонга</string>
     <string name="enter_fuzzy_time_series_value">Введите значение</string>
     <string name="trends_chart">График тенденций</string>
+    <string name="song_model">Модель Сонга</string>
+    <string name="current_step">Шаг %1$d</string>
+    <string name="algorithm_step_info">Описание шага</string>
+    <string name="algorithm_data">[Знач 1, знач 2, … ]</string>
+    <string name="step_fuzzification">Проведём фаззификацию.\nПолучим значения:</string>
+    <string name="step_trends">Выявим тенденции.\nПолучим значения:</string>
+    <string name="step_pairs">Произведём прогноз относительно предпоследнего значения, равного %1$.1f. Его тенденция равна %2$.1f.\nНайдём пары тенденций, начинающиеся с %2$.1f:</string>
+    <string name="pair">Пара: %1$.1f, %2$.1f. Число повторений: %3$d\n</string>
+    <string name="most_frequent_pair">Пара с наибольшим числом повторений: %1$.1f, %2$.1f</string>
+    <string name="step_prediction">Прогноз</string>
+    <string name="prediction">Текущее нечёткое значение находится в множестве: %1$s.\nМножество прогнозируемого значения: %2$s.\nПрогнозируемое значение: %3$.4f\nРеальное значение: %4$.2f.\nПроцент ошибки: %5$.4f.</string>
+    <string name="prediction_chart">График с прогнозом</string>
 </resources>
